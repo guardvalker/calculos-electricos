@@ -10,10 +10,14 @@ export const CONFIG = {
   // Conductividad práctica (m/Ω·mm²) usada para ΔV = k·L·I·cosφ / (S·conductividad)
   conductividad: { cobre: 56, aluminio: 35 },
 
-  caidaTensionMax: {
-    iluminacion: 3, // % AEA 90364
-    fuerzaMotriz: 5, // %
-  },
+  // Clasificación de circuitos terminales según AEA 90364-7-771, con el límite de
+  // caída de tensión admisible (%) que corresponde a cada uno.
+  tiposCircuito: [
+    { value: 'IUG', label: 'IUG — Iluminación de uso general', limite: 3 },
+    { value: 'TUG', label: 'TUG — Tomas de uso general', limite: 5 },
+    { value: 'TUE', label: 'TUE — Tomas de uso especial (horno, aire acond., termotanque)', limite: 5 },
+    { value: 'motores', label: 'Motores (bombas, portones, ascensores)', limite: 5 },
+  ],
 
   // Corriente admisible de referencia (A) por sección, aislación PVC, cobre,
   // método "caño embutido en pared aislante" — base para aplicar factores de corrección.

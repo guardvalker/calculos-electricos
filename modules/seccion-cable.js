@@ -1,3 +1,7 @@
+import { CONFIG as CONFIG_STATIC } from '../config.js';
+
+const TIPO_OPTIONS = CONFIG_STATIC.tiposCircuito.map((t) => ({ value: t.value, label: t.label }));
+
 export default {
   id: 'seccion-cable',
   title: 'Sección de cable por corriente admisible',
@@ -28,8 +32,8 @@ export default {
     { id: 'material', type: 'select', label: 'Conductor', default: 'cobre', visibleIf: (v) => v.incluirCaida === 'si', options: [{ value: 'cobre', label: 'Cobre' }, { value: 'aluminio', label: 'Aluminio' }] },
     { id: 'distancia', type: 'number', label: 'Distancia (ida)', unit: 'm', default: 20, min: 0, visibleIf: (v) => v.incluirCaida === 'si' },
     {
-      id: 'tipoUso', type: 'select', label: 'Tipo de circuito', default: 'iluminacion', visibleIf: (v) => v.incluirCaida === 'si',
-      options: [{ value: 'iluminacion', label: 'Iluminación (máx. 3%)' }, { value: 'fuerza_motriz', label: 'Fuerza motriz (máx. 5%)' }],
+      id: 'tipoUso', type: 'select', label: 'Tipo de circuito (AEA)', default: 'IUG', visibleIf: (v) => v.incluirCaida === 'si',
+      options: TIPO_OPTIONS,
     },
   ],
   calculate(values, CONFIG) {
@@ -58,7 +62,7 @@ export default {
       const k = values.sistema === 'mono220' ? 2 : Math.sqrt(3);
       const tension = values.sistema === 'mono220' ? 220 : 380;
       const conductividad = CONFIG.conductividad[values.material];
-      const maxPct = values.tipoUso === 'iluminacion' ? CONFIG.caidaTensionMax.iluminacion : CONFIG.caidaTensionMax.fuerzaMotriz;
+      const maxPct = CONFIG.tiposCircuito.find((t) => t.value === values.tipoUso)?.limite ?? 5;
       const caidaVAdmisible = (maxPct / 100) * tension;
       const seccionTeorica = (k * values.distancia * values.corriente) / (conductividad * caidaVAdmisible);
       const comerciales = [1.5, 2.5, 4, 6, 10, 16, 25, 35, 50, 70, 95];
