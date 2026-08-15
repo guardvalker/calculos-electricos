@@ -15,7 +15,7 @@ export default {
         { id: 'modulos', type: 'number', label: 'Ancho (módulos DIN)', default: 1, min: 0 },
       ],
     },
-    { id: 'margenPct', type: 'number', label: 'Margen de reserva', unit: '%', default: 25, min: 0, step: 1 },
+    { id: 'margenPct', type: 'number', label: 'Margen de reserva', unit: '%', default: 25, min: 0, step: 1, advanced: true },
   ],
   calculate(values, CONFIG) {
     const elementos = values.elementos || [];
@@ -27,7 +27,7 @@ export default {
       results: [
         { label: 'Total de módulos requeridos', value: totalModulos, unit: 'mód.' },
         { label: 'Con margen de reserva', value: conReserva, unit: 'mód.', decimals: 1 },
-        { label: 'Tablero comercial sugerido', value: sugerido, unit: 'mód.', highlight: true },
+        { label: 'Tablero comercial sugerido', value: sugerido, unit: 'mód.', highlight: true, status: sugerido < conReserva ? 'danger' : 'ok' },
       ],
       notes: sugerido < conReserva ? [{ type: 'warn', text: 'Ni el tablero comercial más grande de la lista alcanza el margen calculado — considerá dos tableros o uno mayor.' }] : [],
       table: {

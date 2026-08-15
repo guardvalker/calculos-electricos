@@ -16,8 +16,8 @@ export default {
       ],
     },
     { id: 'lux', type: 'number', label: 'Lux recomendados (editable)', default: 200, min: 0 },
-    { id: 'eficienciaLuminaria', type: 'number', label: 'Eficiencia de la luminaria', unit: 'lm/W', default: 100, min: 1 },
-    { id: 'lumenPorLuminaria', type: 'number', label: 'Flujo de cada luminaria a instalar', unit: 'lm', default: 1000, min: 1 },
+    { id: 'eficienciaLuminaria', type: 'number', label: 'Eficiencia de la luminaria', unit: 'lm/W', default: 100, min: 1, advanced: true },
+    { id: 'lumenPorLuminaria', type: 'number', label: 'Flujo de cada luminaria a instalar', unit: 'lm', default: 1000, min: 1, advanced: true },
   ],
   calculate(values) {
     const lumenesTotales = values.superficie * values.lux;

@@ -16,11 +16,11 @@ export default {
       ],
     },
     {
-      id: 'tempAmbiente', type: 'select', label: 'Temperatura ambiente', default: '30',
+      id: 'tempAmbiente', type: 'select', label: 'Temperatura ambiente', default: '30', advanced: true,
       options: [20, 25, 30, 35, 40, 45, 50].map((t) => ({ value: String(t), label: `${t} °C` })),
     },
     {
-      id: 'agrupados', type: 'select', label: 'Conductores/circuitos agrupados', default: '1',
+      id: 'agrupados', type: 'select', label: 'Conductores/circuitos agrupados', default: '1', advanced: true,
       options: Array.from({ length: 10 }, (_, i) => i + 1).map((n) => ({ value: String(n), label: String(n) })),
     },
     { id: 'incluirCaida', type: 'select', label: 'Cruzar con caída de tensión', default: 'no', triggersRedraw: true, options: [{ value: 'no', label: 'No' }, { value: 'si', label: 'Sí' }] },

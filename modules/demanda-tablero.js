@@ -26,7 +26,7 @@ export default {
       ],
     },
     { id: 'sistema', type: 'select', label: 'Sistema', default: 'mono220', options: [{ value: 'mono220', label: '220V — Monofásico' }, { value: 'tri380', label: '380V — Trifásico' }] },
-    { id: 'cosPhi', type: 'number', label: 'Cos φ', default: 0.9, min: 0.1, max: 1, step: 0.01 },
+    { id: 'cosPhi', type: 'number', label: 'Cos φ', default: 0.9, min: 0.1, max: 1, step: 0.01, advanced: true },
   ],
   calculate(values, CONFIG) {
     const circuitos = values.circuitos || [];

@@ -170,7 +170,7 @@ function route() {
   }
   const match = hash.match(/^#\/modulo\/(.+)$/);
   if (match && MODULE_MAP[match[1]]) {
-    mountModule(root, MODULE_MAP[match[1]]);
+    mountModule(root, MODULE_MAP[match[1]], MODULE_COLOR[match[1]]);
     window.scrollTo(0, 0);
     return;
   }

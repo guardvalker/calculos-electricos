@@ -36,7 +36,7 @@ export default {
         { label: 'Fase R', value: fases.R, unit: 'W' },
         { label: 'Fase S', value: fases.S, unit: 'W' },
         { label: 'Fase T', value: fases.T, unit: 'W' },
-        { label: '% de desbalance', value: desbalance, unit: '%', highlight: true, warn: desbalance > 10 },
+        { label: '% de desbalance', value: desbalance, unit: '%', highlight: true, status: desbalance > 10 ? 'danger' : 'ok' },
       ],
       notes: desbalance > 10 ? [{ type: 'warn', text: 'Desbalance mayor a 10% — considerá redistribuir circuitos grandes entre fases.' }] : [],
       table: {

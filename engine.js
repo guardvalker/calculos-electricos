@@ -127,9 +127,17 @@ function renderResults(resultBox, output) {
   }
   const grid = el('div', { class: 'result-grid' });
   (output.results || []).forEach((r) => {
-    grid.appendChild(el('div', { class: 'result-item' + (r.highlight ? ' highlight' : '') + (r.warn ? ' warn' : '') }, [
+    const status = r.status || (r.warn ? 'danger' : null);
+    const classes = ['result-item'];
+    if (r.highlight) classes.push('highlight');
+    if (status) classes.push('status-' + status);
+    const label = el('span', { class: 'result-label' });
+    if (status === 'ok') label.appendChild(el('span', { class: 'status-icon', html: iconSvg('check-circle') }));
+    if (status === 'warn' || status === 'danger') label.appendChild(el('span', { class: 'status-icon', html: iconSvg('alert-triangle') }));
+    label.appendChild(document.createTextNode(r.label));
+    grid.appendChild(el('div', { class: classes.join(' ') }, [
       el('span', { class: 'result-value' }, `${fmt(r.value, r.decimals ?? 2)}${r.unit ? ' ' + r.unit : ''}`),
-      el('span', { class: 'result-label' }, r.label),
+      label,
     ]));
   });
   resultBox.appendChild(grid);
@@ -173,7 +181,7 @@ function renderResults(resultBox, output) {
   }
 }
 
-export function mountModule(root, moduleDef) {
+export function mountModule(root, moduleDef, groupColor) {
   root.innerHTML = '';
   const values = buildDefaultValues(moduleDef.fields);
 
@@ -186,7 +194,7 @@ export function mountModule(root, moduleDef) {
     } catch { /* ignore */ }
   }
 
-  const view = el('div', { class: 'module-view' });
+  const view = el('div', { class: 'module-view', ...(groupColor ? { 'data-group': groupColor } : {}) });
   view.appendChild(el('a', { href: '#/', class: 'back-link' }, [el('span', { html: iconSvg('chevron-left') }), 'Menú']));
   view.appendChild(el('h2', {}, moduleDef.title));
   if (moduleDef.description) view.appendChild(el('p', { class: 'module-desc' }, moduleDef.description));
@@ -209,22 +217,32 @@ export function mountModule(root, moduleDef) {
     return moduleDef.fields.filter((f) => !f.visibleIf || f.visibleIf(values));
   }
 
+  function renderField(field) {
+    if (field.type === 'list') {
+      return renderListField(field, values[field.id], () => recompute());
+    }
+    return renderSimpleField(field, values[field.id], (v) => {
+      values[field.id] = v;
+      if (field.sideEffect) field.sideEffect(values, v);
+      if (field.triggersRedraw) redrawForm();
+      recompute();
+    });
+  }
+
   function redrawForm() {
     form.innerHTML = '';
-    fieldsToShow().forEach((field) => {
-      let fieldEl;
-      if (field.type === 'list') {
-        fieldEl = renderListField(field, values[field.id], () => recompute());
-      } else {
-        fieldEl = renderSimpleField(field, values[field.id], (v) => {
-          values[field.id] = v;
-          if (field.sideEffect) field.sideEffect(values, v);
-          if (field.triggersRedraw) redrawForm();
-          recompute();
-        });
-      }
-      form.appendChild(fieldEl);
-    });
+    const visible = fieldsToShow();
+    const basic = visible.filter((f) => !f.advanced);
+    const advanced = visible.filter((f) => f.advanced);
+    basic.forEach((field) => form.appendChild(renderField(field)));
+    if (advanced.length) {
+      const inner = el('div', { class: 'advanced-fields-inner' });
+      advanced.forEach((field) => inner.appendChild(renderField(field)));
+      form.appendChild(el('details', { class: 'advanced-fields' }, [
+        el('summary', {}, 'Opciones avanzadas'),
+        inner,
+      ]));
+    }
     recompute();
   }
 
