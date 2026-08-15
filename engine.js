@@ -1,5 +1,5 @@
 import { CONFIG } from './config.js';
-import { iconSvg } from './icons.js';
+import { iconSvg, OPTION_ICONS } from './icons.js';
 
 const HISTORY_KEY = 'ce-historial';
 const PREFILL_KEY = 'ce-prefill';
@@ -63,6 +63,32 @@ function renderSimpleField(field, value, onChange) {
   return wrap;
 }
 
+function renderChoiceCards(field, value, onChange) {
+  const wrap = el('div', { class: 'field' }, [el('span', { class: 'field-label' }, field.label)]);
+  const grid = el('div', { class: 'choice-grid' });
+  field.options.forEach((opt) => {
+    const icon = OPTION_ICONS[opt.value];
+    const active = String(opt.value) === String(value);
+    grid.appendChild(el('button', {
+      type: 'button',
+      class: 'choice-card' + (active ? ' active' : '') + (icon ? '' : ' no-icon'),
+      onclick: () => onChange(String(opt.value)),
+    }, [
+      icon ? el('span', { class: 'choice-icon', html: iconSvg(icon) }) : null,
+      el('span', { class: 'choice-label' }, opt.label),
+    ]));
+  });
+  wrap.appendChild(grid);
+  if (field.help) wrap.appendChild(el('span', { class: 'field-help' }, field.help));
+  return wrap;
+}
+
+function renderTopLevelField(field, value, onChange) {
+  const useCards = field.type === 'select' && field.cards !== false && (field.cards === true || field.options.length <= 4);
+  if (useCards) return renderChoiceCards(field, value, onChange);
+  return renderSimpleField(field, value, onChange);
+}
+
 function renderListField(field, rows, onChange) {
   const container = el('div', { class: 'list-field' }, [el('span', { class: 'field-label' }, field.label)]);
   const rowsWrap = el('div', { class: 'list-rows' });
@@ -79,9 +105,9 @@ function renderListField(field, rows, onChange) {
         rowEl.appendChild(sf);
       });
       rowEl.appendChild(el('button', {
-        type: 'button', class: 'btn-icon danger', title: 'Quitar',
+        type: 'button', class: 'list-row-remove', title: 'Quitar',
         onclick: () => { rows.splice(idx, 1); redrawRows(); onChange(rows); },
-      }, '×'));
+      }, [el('span', { html: iconSvg('trash') }), 'Quitar']));
       rowsWrap.appendChild(rowEl);
     });
   }
@@ -221,7 +247,7 @@ export function mountModule(root, moduleDef, groupColor) {
     if (field.type === 'list') {
       return renderListField(field, values[field.id], () => recompute());
     }
-    return renderSimpleField(field, values[field.id], (v) => {
+    return renderTopLevelField(field, values[field.id], (v) => {
       values[field.id] = v;
       if (field.sideEffect) field.sideEffect(values, v);
       if (field.triggersRedraw) redrawForm();

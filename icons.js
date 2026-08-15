@@ -28,6 +28,45 @@ export const ICONS = {
   calculator: '<rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8.01" y2="10"/><line x1="12" y1="10" x2="12.01" y2="10"/><line x1="16" y1="10" x2="16.01" y2="10"/><line x1="8" y1="14" x2="8.01" y2="14"/><line x1="12" y1="14" x2="12.01" y2="14"/><line x1="16" y1="14" x2="16.01" y2="14"/><line x1="8" y1="18" x2="8.01" y2="18"/><line x1="12" y1="18" x2="16" y2="18"/>',
   repeat: '<polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>',
   'trending-up': '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>',
+
+  flame: '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 17a2.5 2.5 0 0 0 2.5-2.5c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7.5 7.5 0 1 1-15 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>',
+  snowflake: '<line x1="12" y1="2" x2="12" y2="22"/><line x1="4.9" y1="4.9" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="19.1" y2="4.9"/><line x1="2" y1="12" x2="22" y2="12"/>',
+  droplet: '<path d="M12 2.5s6.5 7.2 6.5 12a6.5 6.5 0 0 1-13 0c0-4.8 6.5-12 6.5-12z"/>',
+  sofa: '<path d="M4 11V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"/><path d="M2 11h20v5a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5z"/><path d="M4 18v2"/><path d="M20 18v2"/>',
+  bed: '<path d="M2 18v-6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v6"/><path d="M2 18v2"/><path d="M22 18v2"/><path d="M4 10V6a2 2 0 0 1 2-2h5v6"/><line x1="2" y1="14" x2="22" y2="14"/>',
+  briefcase: '<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="2" y1="13" x2="22" y2="13"/>',
+  wrench: '<path d="M14.7 6.3a4 4 0 0 1-5.5 5.4L3 18l3 3 6.3-6.2a4 4 0 0 1 5.4-5.5l-3.2 3.2-2.4-.7-.7-2.4z"/>',
+  car: '<path d="M3 13l1.5-4.5A2 2 0 0 1 6.4 7h11.2a2 2 0 0 1 1.9 1.5L21 13"/><path d="M3 13h18v4a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-1H6v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4z"/><circle cx="7.5" cy="17.5" r="1.2"/><circle cx="16.5" cy="17.5" r="1.2"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/>',
+};
+
+// Ícono sugerido por valor de opción — usado por las tarjetas de selección (choice cards)
+// para dar contexto visual rápido a categorías comunes en toda la app.
+export const OPTION_ICONS = {
+  iluminacion: 'bulb',
+  tomas: 'plug',
+  tomas_uso_general: 'plug',
+  cocina: 'flame',
+  horno: 'flame',
+  termotanque: 'flame',
+  aire_acondicionado: 'snowflake',
+  motores: 'wrench',
+  proteccion_general: 'shield',
+  otros: 'sliders',
+  living: 'sofa',
+  bano: 'droplet',
+  ducha: 'droplet',
+  dormitorio: 'bed',
+  oficina: 'briefcase',
+  taller: 'wrench',
+  garage: 'car',
+  exterior: 'sun',
+  mono220: 'activity',
+  tri380: 'grid-dots',
+  LED: 'bulb',
+  halogena: 'bulb',
+  incandescente: 'bulb',
+  fluorescente: 'bulb',
 };
 
 export function iconSvg(name, extraClass = '') {

@@ -4,7 +4,7 @@ export default {
   description: 'kW ↔ HP ↔ CV, A ↔ kVA, W ↔ kWh, ley de Ohm y factor de potencia.',
   fields: [
     {
-      id: 'categoria', type: 'select', label: 'Categoría', default: 'potencia', triggersRedraw: true,
+      id: 'categoria', type: 'select', label: 'Categoría', default: 'potencia', triggersRedraw: true, cards: true,
       options: [
         { value: 'potencia', label: 'Potencia mecánica (kW / HP / CV)' },
         { value: 'corriente_kva', label: 'Corriente ↔ kVA' },

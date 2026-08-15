@@ -10,7 +10,7 @@ export default {
     },
     { id: 'corriente', type: 'number', label: 'Corriente de diseño', unit: 'A', default: 16, min: 0, visibleIf: (v) => v.modoEntrada === 'corriente' },
     {
-      id: 'tipoUso', type: 'select', label: 'Tipo de circuito/uso', default: 'tomas',
+      id: 'tipoUso', type: 'select', label: 'Tipo de circuito/uso', default: 'tomas', cards: true,
       options: [
         { value: 'iluminacion', label: 'Iluminación' },
         { value: 'tomas', label: 'Tomas de uso general' },

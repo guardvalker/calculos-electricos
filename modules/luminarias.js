@@ -7,7 +7,7 @@ export default {
   fields: [
     { id: 'superficie', type: 'number', label: 'Superficie del ambiente', unit: 'm²', default: 12, min: 0 },
     {
-      id: 'tipoUso', type: 'select', label: 'Tipo de uso', default: 'living', triggersRedraw: true,
+      id: 'tipoUso', type: 'select', label: 'Tipo de uso', default: 'living', triggersRedraw: true, cards: true,
       sideEffect: (values, v) => { values.lux = CONFIG.luxRecomendado[v]; },
       options: [
         { value: 'living', label: 'Living' }, { value: 'cocina', label: 'Cocina' }, { value: 'bano', label: 'Baño' },
