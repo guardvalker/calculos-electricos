@@ -5,7 +5,6 @@ import caidaTension from './modules/caida-tension.js';
 import seccionCable from './modules/seccion-cable.js';
 import corrienteCircuito from './modules/corriente-circuito.js';
 import proteccionTermomagnetica from './modules/proteccion-termomagnetica.js';
-import diferencial from './modules/diferencial.js';
 import demandaTablero from './modules/demanda-tablero.js';
 import dimensionamientoTablero from './modules/dimensionamiento-tablero.js';
 import balanceoFases from './modules/balanceo-fases.js';
@@ -17,7 +16,7 @@ import conversorUnidades from './modules/conversor-unidades.js';
 import consumoMensual from './modules/consumo-mensual.js';
 
 const MODULES = [
-  caidaTension, seccionCable, corrienteCircuito, proteccionTermomagnetica, diferencial,
+  caidaTension, seccionCable, corrienteCircuito, proteccionTermomagnetica,
   demandaTablero, dimensionamientoTablero, balanceoFases, bancoCapacitores,
   luminarias, conversorLumens,
   presupuesto, conversorUnidades, consumoMensual,
@@ -25,14 +24,14 @@ const MODULES = [
 
 const MODULE_ICON = {
   'caida-tension': 'trending-down', 'seccion-cable': 'plug', 'corriente-circuito': 'activity',
-  'proteccion-termomagnetica': 'shield', diferencial: 'alert-triangle',
+  'proteccion-termomagnetica': 'shield',
   'demanda-tablero': 'sigma', 'dimensionamiento-tablero': 'grid-dots', 'balanceo-fases': 'scale', 'banco-capacitores': 'sliders',
   luminarias: 'bulb', 'conversor-lumens': 'refresh-cw',
   presupuesto: 'calculator', 'conversor-unidades': 'repeat', 'consumo-mensual': 'trending-up',
 };
 
 const GROUPS = [
-  { title: 'Circuito', color: 'blue', ids: ['caida-tension', 'seccion-cable', 'corriente-circuito', 'proteccion-termomagnetica', 'diferencial'] },
+  { title: 'Circuito', color: 'blue', ids: ['caida-tension', 'seccion-cable', 'corriente-circuito', 'proteccion-termomagnetica'] },
   { title: 'Tablero', color: 'green', ids: ['demanda-tablero', 'dimensionamiento-tablero', 'balanceo-fases', 'banco-capacitores'] },
   { title: 'Iluminación', color: 'peach', ids: ['luminarias', 'conversor-lumens'] },
   { title: 'Presupuesto y consumo', color: 'mauve', ids: ['presupuesto', 'conversor-unidades', 'consumo-mensual'] },

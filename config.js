@@ -49,14 +49,16 @@ export const CONFIG = {
   },
   calibresComercialesTermica: [6, 10, 16, 20, 25, 32, 40, 50, 63, 80, 100, 125, 160, 200],
 
+  // Tipo de circuito/uso — se usa tanto para la curva de térmica como para el diferencial
   curvaPorUso: {
-    iluminacion: 'B', tomas: 'B', motores: 'C', aire_acondicionado: 'C', otros: 'C',
+    iluminacion: 'B', tomas: 'B', cocina: 'B', motores: 'C', aire_acondicionado: 'C', proteccion_general: 'C', otros: 'C',
   },
 
   diferencial: {
     contactoHumano: 30, // mA — tomas, iluminación, baño, cocina
     proteccionGeneral: 300, // mA — incendio / protección general
   },
+  calibresComercialesDiferencial: [25, 40, 63, 80, 100],
 
   // Factor de simultaneidad por tipo de uso (editable según criterio propio)
   factorSimultaneidad: {

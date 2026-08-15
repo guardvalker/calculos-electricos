@@ -1,8 +1,8 @@
-const CACHE = "calculos-electricos-v2";
+const CACHE = "calculos-electricos-v3";
 const ASSETS = [
   "./", "./index.html", "./manifest.json", "./style.css", "./app.js", "./engine.js", "./config.js", "./icons.js",
   "./modules/caida-tension.js", "./modules/seccion-cable.js", "./modules/corriente-circuito.js",
-  "./modules/proteccion-termomagnetica.js", "./modules/diferencial.js", "./modules/demanda-tablero.js",
+  "./modules/proteccion-termomagnetica.js", "./modules/demanda-tablero.js",
   "./modules/dimensionamiento-tablero.js", "./modules/balanceo-fases.js", "./modules/banco-capacitores.js",
   "./modules/luminarias.js", "./modules/conversor-lumens.js", "./modules/presupuesto.js",
   "./modules/conversor-unidades.js", "./modules/consumo-mensual.js",
