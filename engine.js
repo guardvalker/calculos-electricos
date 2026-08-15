@@ -66,17 +66,23 @@ function renderSimpleField(field, value, onChange) {
 function renderChoiceCards(field, value, onChange) {
   const wrap = el('div', { class: 'field' }, [el('span', { class: 'field-label' }, field.label)]);
   const grid = el('div', { class: 'choice-grid' });
+  const buttons = [];
   field.options.forEach((opt) => {
     const icon = OPTION_ICONS[opt.value];
     const active = String(opt.value) === String(value);
-    grid.appendChild(el('button', {
+    const btn = el('button', {
       type: 'button',
       class: 'choice-card' + (active ? ' active' : '') + (icon ? '' : ' no-icon'),
-      onclick: () => onChange(String(opt.value)),
+      onclick: () => {
+        buttons.forEach((b) => b.el.classList.toggle('active', b.value === String(opt.value)));
+        onChange(String(opt.value));
+      },
     }, [
       icon ? el('span', { class: 'choice-icon', html: iconSvg(icon) }) : null,
       el('span', { class: 'choice-label' }, opt.label),
-    ]));
+    ]);
+    buttons.push({ el: btn, value: String(opt.value) });
+    grid.appendChild(btn);
   });
   wrap.appendChild(grid);
   if (field.help) wrap.appendChild(el('span', { class: 'field-help' }, field.help));
