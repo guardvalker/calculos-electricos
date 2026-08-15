@@ -1,4 +1,5 @@
 import { CONFIG } from './config.js';
+import { iconSvg } from './icons.js';
 
 const HISTORY_KEY = 'ce-historial';
 const PREFILL_KEY = 'ce-prefill';
@@ -186,7 +187,7 @@ export function mountModule(root, moduleDef) {
   }
 
   const view = el('div', { class: 'module-view' });
-  view.appendChild(el('a', { href: '#/', class: 'back-link' }, '← Menú'));
+  view.appendChild(el('a', { href: '#/', class: 'back-link' }, [el('span', { html: iconSvg('chevron-left') }), 'Menú']));
   view.appendChild(el('h2', {}, moduleDef.title));
   if (moduleDef.description) view.appendChild(el('p', { class: 'module-desc' }, moduleDef.description));
 
