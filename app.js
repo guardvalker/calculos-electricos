@@ -180,6 +180,45 @@ function route() {
 window.addEventListener('hashchange', route);
 route();
 
+// ---------- Novedades de la app ----------
+// subir APP_VERSION y agregar una entrada acá en cada cambio que valga la pena avisar
+const APP_VERSION = '1.1.0';
+const CHANGELOG = {
+  '1.1.0': [
+    'Ahora te avisamos acá cuando la app tiene novedades, en vez de que te enteres por sorpresa.',
+  ],
+};
+const SEEN_VERSION_KEY = 'ce-seen-version';
+
+function showWhatsnew() {
+  const entries = CHANGELOG[APP_VERSION] || [];
+  const overlay = el('div', { class: 'whatsnew-overlay' });
+  const close = () => overlay.remove();
+  overlay.appendChild(el('div', { class: 'whatsnew-sheet' }, [
+    el('div', { class: 'whatsnew-head' }, [
+      el('h2', {}, 'Se actualizó la app'),
+      el('button', { type: 'button', class: 'btn-icon', 'aria-label': 'Cerrar', onclick: close }, '✕'),
+    ]),
+    el('div', { class: 'whatsnew-version' }, `versión ${APP_VERSION}`),
+    el('ul', { class: 'whatsnew-list' }, entries.map((text) => el('li', {}, text))),
+    el('div', { class: 'whatsnew-actions' }, [
+      el('button', { type: 'button', class: 'btn-primary', onclick: close }, 'Entendido'),
+    ]),
+  ]));
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+  document.body.appendChild(overlay);
+}
+
+function checkForUpdate() {
+  let seen = null;
+  try { seen = localStorage.getItem(SEEN_VERSION_KEY); } catch (e) { /* noop */ }
+  if (seen === APP_VERSION) return;
+  const isBrandNewUser = seen === null && loadHistory().length === 0;
+  if (!isBrandNewUser) showWhatsnew();
+  try { localStorage.setItem(SEEN_VERSION_KEY, APP_VERSION); } catch (e) { /* noop */ }
+}
+checkForUpdate();
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js').catch(() => {});

@@ -440,6 +440,34 @@ button { font-family: inherit; cursor: pointer; }
 .theme-toggle-btn .icon { width: 22px; height: 22px; }
 .theme-toggle-btn:active { transform: scale(0.94); }
 
+/* What's new modal */
+.whatsnew-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 50;
+}
+.whatsnew-sheet {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  width: min(360px, 100%);
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+.whatsnew-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+.whatsnew-head h2 { margin: 0; font-size: 1.1rem; }
+.whatsnew-version { font-size: 0.8rem; color: var(--text-dim); font-family: ui-monospace, monospace; margin-bottom: 12px; }
+.whatsnew-list { margin: 0 0 16px; padding: 0 0 0 18px; display: flex; flex-direction: column; gap: 8px; }
+.whatsnew-list li { font-size: 0.9rem; color: var(--text); line-height: 1.4; }
+.whatsnew-actions { display: flex; justify-content: flex-end; }
+
 @media (max-width: 380px) {
   .list-row { grid-template-columns: 1fr; }
 }

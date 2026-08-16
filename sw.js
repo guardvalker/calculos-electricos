@@ -1,4 +1,4 @@
-const CACHE = "calculos-electricos-v3";
+const CACHE = "calculos-electricos-v4";
 const ASSETS = [
   "./", "./index.html", "./manifest.json", "./style.css", "./app.js", "./engine.js", "./config.js", "./icons.js",
   "./modules/caida-tension.js", "./modules/seccion-cable.js", "./modules/corriente-circuito.js",
